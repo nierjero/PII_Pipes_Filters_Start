@@ -23,19 +23,19 @@ namespace CompAndDel
             // Envia la imagen a través de los Pipes y guarda las imágenes intermedias
             picture = pipe1.Send(picture);
 
-            // Guardar la imagen intermedia después de FilterGreyscale
+            // Guarda la imagen intermedia después de FilterGreyscale
             provider.SavePicture(picture, @"C:\Users\Jero\Desktop\ProgII\ReposPipe\PII_Pipes_Filters_Start\src\Program\intermediate1.jpg");
 
-            // Continuar con la secuencia
+            // Continua con la secuencia
             picture = pipe2.Send(picture);
 
-            // Guardar la imagen intermedia después de FilterNegative
+            // Guarda la imagen intermedia después de FilterNegative
             provider.SavePicture(picture, @"C:\Users\Jero\Desktop\ProgII\ReposPipe\PII_Pipes_Filters_Start\src\Program\intermediate2.jpg");
 
-            // Continuar con la secuencia
+            // Continua con la secuencia
             picture = pipe3.Send(picture);
 
-            // Guardar la imagen final
+            // Guarda la imagen final
             provider.SavePicture(picture, @"C:\Users\Jero\Desktop\ProgII\ReposPipe\PII_Pipes_Filters_Start\src\Program\final.jpg");
         }
     }
