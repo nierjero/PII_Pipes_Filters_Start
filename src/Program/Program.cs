@@ -9,7 +9,7 @@ namespace CompAndDel
         static void Main(string[] args)
         {
             PictureProvider provider = new PictureProvider();
-            IPicture picture = provider.GetPicture(@"C:\Users\Jero\Desktop\ProgII\ReposPipe\PII_Pipes_Filters_Start\src\Program\luke.jpg");
+            IPicture picture = provider.GetPicture(@"C:\Users\Jero\Desktop\ProgII\ReposPipe\PII_Pipes_Filters_Start\src\Program\beer.jpg");
 
             // Crea los objetos Filter en orden inverso
             IFilter filter2 = new FilterNegative();
@@ -19,6 +19,13 @@ namespace CompAndDel
             IPipe pipe3 = new PipeNull();
             IPipe pipe2 = new PipeSerial(filter2, pipe3);
             IPipe pipe1 = new PipeSerial(filter1, pipe2);
+
+              IFilterConditional filterConditional = new FilterConditionalCognitive();
+            filterConditional.Initialize();
+            IFilter filterWithFace = new FilterGreyscale(); 
+            IFilter filterWithoutFace = new FilterNegative(); // 
+            IPipeConditionalBifurcation bifurcationPipe = new PipeConditionalBifurcation(filterConditional, filterWithFace, filterWithoutFace);
+            picture = bifurcationPipe.Send(picture);
 
             // Envia la imagen a través de los Pipes y guarda las imágenes 
             picture = pipe1.Send(picture);
